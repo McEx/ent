@@ -46,6 +46,8 @@ defmodule Ent.Component do
       Module.get_attribute(mod, @component_dependencies_attr)
       |> Enum.dedup
 
+    Ent.Collector.add_component(env, component_deps)
+
     static_funs = quote location: :keep do
       def ent_event_handlers do
         unquote(Module.get_attribute(mod, @event_handlers_attr))
